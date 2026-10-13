@@ -59,7 +59,7 @@ end, { desc = "Format buffer" })
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { desc = "Quickfix list (Trouble)" })
+map("n", "<leader>xq", "<cmd>Trouble quickfix toggle<cr>", { desc = "Quickfix list (Trouble)" })
 
 -- Terminal escape
 map("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal" })

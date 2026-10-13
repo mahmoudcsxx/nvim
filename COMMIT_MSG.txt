@@ -1,0 +1,31 @@
+Fix two broken config files; correct and complete the README
+
+Fixes
+- snippets/java.lua used `then` as a table key. `then` is a Lua reserved word, so
+  the file was a syntax error and had never loaded - all 15 Java snippets were
+  silently unavailable. Quoted the key: ["then"]. The file is loaded at runtime
+  by luasnip.loaders.from_lua, so this was user-visible.
+- lua/config/keymaps.lua mapped <leader>xq to <cmd>TroubleToggle quickfix<cr>,
+  which is the trouble.nvim v2 command. The rest of the config already uses the
+  v3 API (require("trouble").is_open(), <cmd>Trouble diagnostics toggle<cr>), so
+  that mapping was dead. Now <cmd>Trouble quickfix toggle<cr>.
+
+README
+- The Structure tree omitted lua/plugins/discord.lua. It now matches the files
+  on disk exactly.
+- Install instructions assumed ~/.config/nvim. Neovim reads its config from
+  %LOCALAPPDATA%\nvim on Windows, so Windows and Linux/macOS are now documented
+  separately.
+- Added the Discord Rich Presence plugin to Highlights, and the <leader>wd,
+  <leader>fn, <A-j>/<A-k> and <leader>xq> mappings to the keymap table.
+- Noted that the published config can lag behind the local one.
+
+Verified with nvim 0.12.5, headless, against a copy (the live config at
+%LOCALAPPDATA%\nvim was not touched):
+- Parsed all 22 Lua files with loadfile(): 22 pass, 0 fail (was 21/1).
+- Evaluated all 4 snippet files with a stubbed luasnip API: all load and return
+  tables - 16 + 13 + 15 + 13 = 57 snippets (java.lua previously contributed 0).
+- Every file named in the README structure tree exists, and no file on disk is
+  missing from it.
+- All 31 documented keymaps resolve to definitions in lua/. The one checker
+  flag, <C-h/j/k/l>, is shorthand for four separate maps - all four present.

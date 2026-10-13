@@ -42,7 +42,7 @@ return {
 
   s("test", fmt(
     "@Test\nvoid {name}() {{\n    // given\n    {given}\n    // when\n    {when}\n    // then\n    {then}\n}}",
-    { name = i(1, "shouldDoSomething"), given = i(2), when = i(3), then = i(0) }
+    { name = i(1, "shouldDoSomething"), given = i(2), when = i(3), ["then"] = i(0) }
   )),
 
   s("getter", fmt(
